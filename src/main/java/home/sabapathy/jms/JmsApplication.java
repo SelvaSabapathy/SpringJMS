@@ -12,6 +12,6 @@ public class JmsApplication
     public static void main(String[] args)
     {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(JmsApplication.class, args);
-        new Publisher(applicationContext).publishMessage();
+        ((Publisher) applicationContext.getBean(Publisher.class)).publishMessage();
     }
 }

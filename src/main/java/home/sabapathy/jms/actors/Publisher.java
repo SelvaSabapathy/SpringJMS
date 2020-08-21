@@ -1,23 +1,19 @@
 package home.sabapathy.jms.actors;
 
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.stereotype.Component;
 
 import home.sabapathy.jms.model.Message;
 
+@Component
 public class Publisher
 {
-    private ConfigurableApplicationContext applicationContext;
-
-    public Publisher(ConfigurableApplicationContext applicationContext)
-    {
-        this.applicationContext = applicationContext;
-    }
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     public void publishMessage()
     {
-        JmsTemplate jmsTemplate = applicationContext.getBean(JmsTemplate.class);
-
         System.out.println("Sending a message.");
         jmsTemplate.convertAndSend("aTopic", new Message("hello, world!"));
     }
